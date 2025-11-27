@@ -36,7 +36,7 @@ export async function POST(request: NextRequest) {
     const compressedSize = compressed.length;
     const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(2);
 
-    return new NextResponse(compressed, {
+    return new NextResponse(new Uint8Array(compressed), {
       headers: {
         'Content-Type': `image/${metadata.format}`,
         'X-Original-Size': originalSize.toString(),
