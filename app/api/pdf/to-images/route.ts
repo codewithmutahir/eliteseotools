@@ -99,7 +99,7 @@ export async function POST(request: NextRequest) {
           const contentType = serverResponse.headers.get('content-type') || 'image/png';
           const fileExtension = format === 'jpg' || format === 'jpeg' ? 'jpg' : 'png';
 
-          return new NextResponse(imageBuffer, {
+          return new Response(imageBuffer, {
             headers: {
               'Content-Type': contentType,
               'Content-Disposition': `attachment; filename="page_${pageNumber}.${fileExtension}"`,
@@ -202,7 +202,7 @@ export async function POST(request: NextRequest) {
       fileExtension = 'png';
     }
 
-    return new NextResponse(new Uint8Array(imageBuffer), {
+    return new Response(new Uint8Array(imageBuffer), {
       headers: {
         'Content-Type': contentType,
         'Content-Disposition': `attachment; filename="page_${pageNumber}.${fileExtension}"`,

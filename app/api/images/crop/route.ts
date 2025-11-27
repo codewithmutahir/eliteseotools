@@ -29,7 +29,7 @@ export async function POST(request: NextRequest) {
       .extract({ left, top, width, height })
       .toBuffer();
 
-    return new NextResponse(new Uint8Array(cropped), {
+    return new Response(new Uint8Array(cropped), {
       headers: {
         'Content-Type': `image/${metadata.format}`,
         'X-Original-Width': metadata.width?.toString() || '0',

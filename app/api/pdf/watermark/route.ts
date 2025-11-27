@@ -43,7 +43,7 @@ export async function POST(request: NextRequest) {
 
     const pdfBytes = await pdfDoc.save();
 
-    return new NextResponse(pdfBytes, {
+    return new Response(pdfBytes, {
       headers: {
         'Content-Type': 'application/pdf',
         'X-Page-Count': pages.length.toString(),
