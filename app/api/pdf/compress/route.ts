@@ -24,7 +24,7 @@ export async function POST(request: NextRequest) {
     const compressedSize = pdfBytes.length;
     const savings = ((originalSize - compressedSize) / originalSize * 100).toFixed(2);
 
-    return new Response(new Blob([pdfBytes], { type: 'application/pdf' }), {
+    return new Response(new Blob([pdfBytes as BlobPart], { type: 'application/pdf' }), {
       headers: {
         'Content-Type': 'application/pdf',
         'X-Original-Size': originalSize.toString(),

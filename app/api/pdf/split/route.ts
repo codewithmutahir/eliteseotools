@@ -32,7 +32,7 @@ export async function POST(request: NextRequest) {
 
     const pdfBytes = await newPdf.save();
 
-    return new Response(new Blob([pdfBytes], { type: 'application/pdf' }), {
+    return new Response(new Blob([pdfBytes as BlobPart], { type: 'application/pdf' }), {
       headers: {
         'Content-Type': 'application/pdf',
         'X-Total-Pages': totalPages.toString(),

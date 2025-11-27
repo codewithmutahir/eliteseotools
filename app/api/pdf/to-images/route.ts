@@ -202,7 +202,7 @@ export async function POST(request: NextRequest) {
       fileExtension = 'png';
     }
 
-    return new Response(new Uint8Array(imageBuffer), {
+    return new Response(new Blob([imageBuffer as BlobPart], { type: contentType }), {
       headers: {
         'Content-Type': contentType,
         'Content-Disposition': `attachment; filename="page_${pageNumber}.${fileExtension}"`,

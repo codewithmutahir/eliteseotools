@@ -33,7 +33,7 @@ export async function POST(request: NextRequest) {
 
     const resizedMetadata = await sharp(resized).metadata();
 
-    return new Response(new Uint8Array(resized), {
+    return new Response(new Blob([resized as BlobPart], { type: `image/${metadata.format}` }), {
       headers: {
         'Content-Type': `image/${metadata.format}`,
         'X-Original-Width': metadata.width?.toString() || '0',

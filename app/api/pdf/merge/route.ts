@@ -27,7 +27,7 @@ export async function POST(request: NextRequest) {
     // Save the merged PDF
     const mergedPdfBytes = await mergedPdf.save();
 
-    return new Response(new Blob([mergedPdfBytes], { type: 'application/pdf' }), {
+    return new Response(new Blob([mergedPdfBytes as BlobPart], { type: 'application/pdf' }), {
       headers: {
         'Content-Type': 'application/pdf',
         'X-Page-Count': mergedPdf.getPageCount().toString(),

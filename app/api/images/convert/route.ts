@@ -39,7 +39,7 @@ export async function POST(request: NextRequest) {
         throw new Error('Unsupported format');
     }
 
-    return new Response(new Uint8Array(converted), {
+    return new Response(new Blob([converted as BlobPart], { type: contentType }), {
       headers: {
         'Content-Type': contentType,
         'X-Format': format,
