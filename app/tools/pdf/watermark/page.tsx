@@ -8,8 +8,11 @@ import { Input } from "@/components/ui/input"
 import { Download, RefreshCw } from "lucide-react"
 import { imageUtils } from "@/lib/imageUtils"
 import { motion } from "framer-motion"
+import { useAuthModal } from "@/hooks/useAuthModal"
+import { AuthModal } from "@/components/AuthModal"
 
 export default function PDFWatermarkPage() {
+  const { isOpen, requireAuth, handleClose, handleSuccess } = useAuthModal()
   const [file, setFile] = useState<File | null>(null)
   const [watermarkText, setWatermarkText] = useState<string>("")
   const [opacity, setOpacity] = useState<number>(30)
