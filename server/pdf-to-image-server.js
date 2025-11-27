@@ -7,10 +7,18 @@
 const express = require('express');
 const multer = require('multer');
 const sharp = require('sharp');
+const cors = require('cors')
 const PORT = process.env.PDF_SERVER_PORT || 3002;
 
+
 const app = express();
-const upload = multer({ storage: multer.memoryStorage() });
+
+app.use(cors({
+  origin: '*',
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}))
+const upload = multer({ storage: multer.memoryStorage(), limits: { fileSize: 10 * 1024 * 1024 } });
 
 // Try to import canvas
 let createCanvas = null;
