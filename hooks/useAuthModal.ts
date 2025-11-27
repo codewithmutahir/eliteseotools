@@ -1,27 +1,28 @@
 "use client"
 
-import { useState, useCallback, useEffect } from "react"
+import { useState, useCallback, useEffect, useRef } from "react"
 import { useAuth } from "@clerk/nextjs"
 
 export function useAuthModal() {
   const [isOpen, setIsOpen] = useState(false)
-  const [onSuccessCallback, setOnSuccessCallback] = useState<(() => void) | null>(null)
+  const callbackRef = useRef<(() => void) | null>(null)
   const { isSignedIn, isLoaded } = useAuth()
 
-  // Wait for auth to load before checking
+  // Watch for sign-in while modal is open
   useEffect(() => {
-    if (isLoaded && isSignedIn && isOpen && onSuccessCallback) {
+    if (isLoaded && isSignedIn && isOpen && callbackRef.current) {
       // User just signed in, execute callback
-      onSuccessCallback()
+      const callback = callbackRef.current
+      callbackRef.current = null
       setIsOpen(false)
-      setOnSuccessCallback(null)
+      // Execute callback after state updates
+      setTimeout(() => callback(), 0)
     }
-  }, [isLoaded, isSignedIn, isOpen, onSuccessCallback])
+  }, [isLoaded, isSignedIn, isOpen])
 
   const requireAuth = useCallback((onSuccess?: () => void) => {
     // Wait for auth to load
     if (!isLoaded) {
-      // Still loading, wait a bit
       setTimeout(() => requireAuth(onSuccess), 100)
       return
     }
@@ -32,23 +33,25 @@ export function useAuthModal() {
       return
     }
     
-    // User not signed in, show modal
-    setOnSuccessCallback(() => onSuccess || null)
+    // User not signed in, store callback and show modal
+    callbackRef.current = onSuccess || null
     setIsOpen(true)
   }, [isSignedIn, isLoaded])
 
   const handleClose = useCallback(() => {
     setIsOpen(false)
-    setOnSuccessCallback(null)
+    callbackRef.current = null
   }, [])
 
   const handleSuccess = useCallback(() => {
-    if (onSuccessCallback) {
-      onSuccessCallback()
-    }
+    const callback = callbackRef.current
+    callbackRef.current = null
     setIsOpen(false)
-    setOnSuccessCallback(null)
-  }, [onSuccessCallback])
+    // Execute callback after modal closes
+    if (callback) {
+      setTimeout(() => callback(), 0)
+    }
+  }, [])
 
   return {
     isOpen,
@@ -57,4 +60,3 @@ export function useAuthModal() {
     handleSuccess,
   }
 }
-
