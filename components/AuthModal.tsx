@@ -57,7 +57,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                   <div className="space-y-3">
                     <SignInButton 
                       mode="modal" 
-                      afterSignInUrl={typeof window !== 'undefined' ? window.location.href : '/'}
+                      forceRedirectUrl={typeof window !== 'undefined' ? window.location.href : '/'}
                     >
                       <Button className="w-full" size="lg">
                         Sign In
@@ -65,7 +65,7 @@ export function AuthModal({ isOpen, onClose, onSuccess }: AuthModalProps) {
                     </SignInButton>
                     <SignUpButton 
                       mode="modal" 
-                      afterSignUpUrl={typeof window !== 'undefined' ? window.location.href : '/'}
+                      forceRedirectUrl={typeof window !== 'undefined' ? window.location.href : '/'}
                     >
                       <Button variant="outline" className="w-full" size="lg">
                         Create Account
