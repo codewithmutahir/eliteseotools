@@ -1,10 +1,36 @@
 version: '3.8'
 
 services:
-  pdf-server:
+  # Next.js Application
+  web:
     build:
       context: .
       dockerfile: Dockerfile
+    container_name: smallseotools-web
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_BASE_URL=${OPENAI_BASE_URL}
+      - NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL:-http://localhost:3000}
+      - NEXT_PUBLIC_SITE_NAME=${NEXT_PUBLIC_SITE_NAME:-SmallSEOTools}
+      - PDF_SERVER_URL=http://pdf-server:3002
+      - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=${NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY}
+      - CLERK_SECRET_KEY=${CLERK_SECRET_KEY}
+    depends_on:
+      pdf-server:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - app-network
+
+  # PDF to Image Server (with canvas support)
+  pdf-server:
+    build:
+      context: .
+      dockerfile: Dockerfile.pdf-server
     container_name: pdf-to-image-server
     ports:
       - "3002:3002"
@@ -18,4 +44,9 @@ services:
       timeout: 3s
       retries: 3
       start_period: 10s
+    networks:
+      - app-network
 
+networks:
+  app-network:
+    driver: bridge
