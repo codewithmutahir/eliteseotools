@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: "Contact Us | Elitesolution USA",
   description: "Contact Us for expert SEO tools and support. Reach out today to get personalized solutions that elevate your digital marketing success.",
   keywords: "Contact Us",
+  openGraph: {
+    title: "Contact Us | Elitesolution USA",
+    description: "Contact Us for expert SEO tools and support. Reach out today to get personalized solutions that elevate your digital marketing success.",
+    url: "https://seotools.elitesolutionusa.com/contact",
+    siteName: "Elitesolution USA",
+    type: "website",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Contact Us | Elitesolution USA",
+    description: "Contact Us for expert SEO tools and support. Reach out today to get personalized solutions that elevate your digital marketing success.",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
 }
 
 export default function ContactPage() {

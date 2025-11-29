@@ -5,6 +5,20 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Elitesolution USA",
   description: "Explore our Privacy Policy to understand how we securely collect, use, and protect your personal data with complete transparency.",
   keywords: "Privacy Policy",
+  openGraph: {
+    title: "Privacy Policy | Elitesolution USA",
+    description: "Explore our Privacy Policy to understand how we securely collect, use, and protect your personal data with complete transparency.",
+    url: "https://seotools.elitesolutionusa.com/privacy",
+    siteName: "Elitesolution USA",
+    type: "website",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Privacy Policy | Elitesolution USA",
+    description: "Explore our Privacy Policy to understand how we securely collect, use, and protect your personal data with complete transparency.",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
 }
 
 export default function PrivacyPage() {

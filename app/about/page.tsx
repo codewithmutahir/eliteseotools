@@ -6,6 +6,20 @@ export const metadata: Metadata = {
   title: "About Us | Elitesolution USA",
   description: "Learn more About Us — Elite Solution USA offers SEO tools and expert services to boost your online visibility.",
   keywords: "About Us",
+  openGraph: {
+    title: "About Us | Elitesolution USA",
+    description: "Learn more About Us — Elite Solution USA offers SEO tools and expert services to boost your online visibility.",
+    url: "https://seotools.elitesolutionusa.com/about",
+    siteName: "Elitesolution USA",
+    type: "website",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "About Us | Elitesolution USA",
+    description: "Learn more About Us — Elite Solution USA offers SEO tools and expert services to boost your online visibility.",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
 }
 
 export default function AboutPage() {

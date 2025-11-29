@@ -20,6 +20,20 @@ export const metadata: Metadata = {
   verification: {
     google: "jnsYszeElPx3OMtH10GeVUNtkmEaDd7AfFJom2aBLow",
   },
+  openGraph: {
+    title: "Free Online SEO Tool Suite | Elitesolution USA",
+    description: "Boost your website's performance with our advanced SEO Tool designed to analyze rankings, optimize content, and drive organic traffic.",
+    url: "https://seotools.elitesolutionusa.com",
+    siteName: "Elitesolution USA",
+    type: "website",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Free Online SEO Tool Suite | Elitesolution USA",
+    description: "Boost your website's performance with our advanced SEO Tool designed to analyze rankings, optimize content, and drive organic traffic.",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
+  },
 }
 
 export default function RootLayout({
