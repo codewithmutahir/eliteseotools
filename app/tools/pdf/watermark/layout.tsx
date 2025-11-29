@@ -10,11 +10,13 @@ export const metadata: Metadata = {
     url: "https://seotools.elitesolutionusa.com/tools/pdf/watermark",
     siteName: "Elitesolution USA",
     type: "website",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
   },
   twitter: {
     card: "summary_large_image",
     title: "Add Watermark to PDF Online For Free | Elitesolution USA",
     description: "Easily Add Watermark to PDF online with our free tool. Protect your documents quickly and securely in just a few clicks.",
+    images: ["https://khaki-worm-335413.hostingersite.com/wp-content/uploads/2024/11/cropped-kyMDfk.png"],
   },
 }
 
