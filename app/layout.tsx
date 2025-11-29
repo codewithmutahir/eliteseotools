@@ -13,9 +13,13 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Elite SEO Suite - Professional SEO & Content Tools",
-  description: "A comprehensive collection of AI-powered and text processing tools for content creation, SEO, and text manipulation.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'),
+  title: "Free Online SEO Tool Suite | Elitesolution USA",
+  description: "Boost your website's performance with our advanced SEO Tool designed to analyze rankings, optimize content, and drive organic traffic.",
+  keywords: "SEO Tool",
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://seotools.elitesolutionusa.com'),
+  verification: {
+    google: "jnsYszeElPx3OMtH10GeVUNtkmEaDd7AfFJom2aBLow",
+  },
 }
 
 export default function RootLayout({

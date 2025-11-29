@@ -3,8 +3,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Phone, Mail, MapPin, Globe } from "lucide-react"
 
 export const metadata: Metadata = {
-  title: "About Us - Elite SEO Suite",
-  description: "Learn more about Elite Solutions and our comprehensive SEO and content tools.",
+  title: "About Us | Elitesolution USA",
+  description: "Learn more About Us — Elite Solution USA offers SEO tools and expert services to boost your online visibility.",
+  keywords: "About Us",
 }
 
 export default function AboutPage() {

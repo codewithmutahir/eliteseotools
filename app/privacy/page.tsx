@@ -2,8 +2,9 @@ import { Metadata } from "next"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
 export const metadata: Metadata = {
-  title: "Privacy Policy - Elite SEO Suite",
-  description: "Privacy Policy for Elite SEO Suite and Elite Solutions.",
+  title: "Privacy Policy | Elitesolution USA",
+  description: "Explore our Privacy Policy to understand how we securely collect, use, and protect your personal data with complete transparency.",
+  keywords: "Privacy Policy",
 }
 
 export default function PrivacyPage() {
