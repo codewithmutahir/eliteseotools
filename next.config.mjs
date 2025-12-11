@@ -4,8 +4,6 @@ const nextConfig = {
   // Optimize for production
   poweredByHeader: false,
   compress: true,
-  // Enable standalone output for Docker deployment
-  output: 'standalone',
   // Image optimization
   images: {
     formats: ['image/avif', 'image/webp'],
