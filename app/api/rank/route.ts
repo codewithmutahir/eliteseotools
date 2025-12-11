@@ -3,8 +3,9 @@
  * Handles rank checking with caching support
  */
 
-export const runtime = 'nodejs';
+// Route segment config for Vercel production
 export const dynamic = 'force-dynamic';
+export const runtime = 'nodejs';
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
