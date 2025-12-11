@@ -12,6 +12,8 @@ const nextConfig = {
   },
   // Server components external packages (native modules)
   serverExternalPackages: ['better-sqlite3', 'canvas'],
+  // Empty turbopack config to silence warning (we're using webpack via --webpack flag)
+  turbopack: {},
   // Webpack config for canvas (optional dependency) and pdfjs-dist
   // This will be used when running with --webpack flag or in production
   webpack: (config, { isServer }) => {
