@@ -6,13 +6,10 @@ import Database from 'better-sqlite3';
 import { existsSync, mkdirSync } from 'fs';
 import { join } from 'path';
 
-const DB_DIR = join(process.cwd(), 'data');
+// Use /tmp for Vercel serverless, local data directory otherwise
+const isVercel = process.env.VERCEL === '1';
+const DB_DIR = isVercel ? '/tmp' : join(process.cwd(), 'data');
 const DB_PATH = join(DB_DIR, 'cache.sqlite');
-
-// Ensure data directory exists
-if (!existsSync(DB_DIR)) {
-  mkdirSync(DB_DIR, { recursive: true });
-}
 
 let db: Database.Database | null = null;
 
@@ -24,15 +21,26 @@ export function getDatabase(): Database.Database {
     return db;
   }
 
-  db = new Database(DB_PATH);
-  
-  // Enable WAL mode for better concurrency
-  db.pragma('journal_mode = WAL');
-  
-  // Initialize schema
-  initializeSchema(db);
-  
-  return db;
+  try {
+    // Ensure data directory exists (safe to call multiple times)
+    if (!existsSync(DB_DIR)) {
+      mkdirSync(DB_DIR, { recursive: true });
+    }
+
+    db = new Database(DB_PATH);
+    
+    // Enable WAL mode for better concurrency
+    db.pragma('journal_mode = WAL');
+    
+    // Initialize schema
+    initializeSchema(db);
+    
+    console.log(`✅ Database initialized at: ${DB_PATH}`);
+    return db;
+  } catch (error) {
+    console.error('❌ Failed to initialize database:', error);
+    throw error;
+  }
 }
 
 /**
