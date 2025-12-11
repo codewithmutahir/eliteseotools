@@ -20,13 +20,9 @@ const nextConfig = {
         canvas: 'commonjs canvas',
         'better-sqlite3': 'commonjs better-sqlite3',
       });
-    } else {
-      // Client-side: ensure pdfjs-dist worker is handled correctly
-      config.resolve.alias = {
-        ...config.resolve.alias,
-        'pdfjs-dist': require.resolve('pdfjs-dist'),
-      };
     }
+    // Client-side: webpack will resolve pdfjs-dist automatically
+    // No need for explicit alias as webpack handles it correctly
     return config;
   },
 }
