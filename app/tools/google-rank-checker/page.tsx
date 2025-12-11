@@ -24,6 +24,14 @@ export default function GoogleRankCheckerPage() {
   // Add user/auth state using our auth modal hook
   const { isOpen, requireAuth, handleClose, handleSuccess } = useAuthModal();
 
+  console.log('🎯 [GoogleRankCheckerPage] Render state:', {
+    params,
+    isLoading,
+    hasData: !!data,
+    hasError: !!error,
+    errorMessage: error?.message,
+  });
+
   const formatDate = (timestamp: number | null): string => {
     if (!timestamp) return 'N/A';
     return new Date(timestamp).toLocaleString();
@@ -37,7 +45,13 @@ export default function GoogleRankCheckerPage() {
         description="Check your website's Google search ranking for any keyword. Track your SEO performance and monitor your position in search results."
       >
         <div className="space-y-6">
-          <RankForm onSubmit={(params: RankCheckParams) => { requireAuth(() => { setParams(params); }); }} isLoading={isLoading} />
+          <RankForm onSubmit={(params: RankCheckParams) => {
+            console.log('📝 [GoogleRankCheckerPage] Form submitted with params:', params);
+            requireAuth(() => {
+              console.log('✅ [GoogleRankCheckerPage] Auth passed, setting params:', params);
+              setParams(params);
+            });
+          }} isLoading={isLoading} />
 
           {error && (
             <motion.div

@@ -25,32 +25,50 @@ export function useRankChecker(
   return useQuery({
     queryKey: ['rank', params?.domain, params?.keyword, params?.location],
     queryFn: async (): Promise<RankCheckResponse> => {
+      console.log('🚀 [useRankChecker] Starting rank check with params:', params);
+      
       if (!params) {
         throw new Error('Rank check parameters are required');
       }
 
-      const response = await fetch('/api/rank', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(params),
-      });
+      console.log('🌐 [useRankChecker] Making fetch request to /api/rank');
+      
+      try {
+        const response = await fetch('/api/rank', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(params),
+        });
 
-      if (!response.ok) {
-        let errorMessage = `Failed to check rank (${response.status})`;
-        try {
-          const errorData = await response.json();
-          errorMessage = errorData.error || errorMessage;
-        } catch (e) {
-          // If response is not JSON, use status text
-          errorMessage = response.statusText || errorMessage;
+        console.log('📡 [useRankChecker] Response received:', {
+          status: response.status,
+          statusText: response.statusText,
+          ok: response.ok,
+          headers: Object.fromEntries(response.headers.entries()),
+        });
+
+        if (!response.ok) {
+          let errorMessage = `Failed to check rank (${response.status})`;
+          try {
+            const errorData = await response.json();
+            console.error('❌ [useRankChecker] Error response:', errorData);
+            errorMessage = errorData.error || errorMessage;
+          } catch (e) {
+            console.error('❌ [useRankChecker] Failed to parse error response:', e);
+            errorMessage = response.statusText || errorMessage;
+          }
+          throw new Error(errorMessage);
         }
-        throw new Error(errorMessage);
-      }
 
-      const data = await response.json();
-      return data;
+        const data = await response.json();
+        console.log('✅ [useRankChecker] Success:', data);
+        return data;
+      } catch (error) {
+        console.error('💥 [useRankChecker] Fetch error:', error);
+        throw error;
+      }
     },
     enabled: enabled && params !== null,
     staleTime: 30 * 60 * 1000, // 30 minutes client-side cache
