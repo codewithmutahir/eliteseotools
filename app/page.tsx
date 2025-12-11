@@ -37,7 +37,18 @@ import {
   Files,
   FileType,
   Droplet,
+  TrendingUp,
 } from "lucide-react"
+
+const seoTools = [
+  {
+    name: "Google Rank Checker",
+    description: "Check your website's Google search ranking for any keyword",
+    href: "/tools/google-rank-checker",
+    icon: TrendingUp,
+    color: "text-blue-600",
+  },
+]
 
 const aiTools = [
   {
@@ -322,6 +333,40 @@ export default function HomePage() {
       </motion.div>
 
       <div className="space-y-12">
+        {/* SEO Tools */}
+        <section>
+          <motion.h2
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="text-2xl md:text-3xl font-bold mb-6"
+          >
+            🔍 SEO Tools
+          </motion.h2>
+          <motion.div
+            variants={container}
+            initial="hidden"
+            animate="show"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {seoTools.map((tool) => (
+              <motion.div key={tool.href} variants={item}>
+                <Link href={tool.href}>
+                  <Card className="h-full hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
+                    <CardHeader>
+                      <div className="flex items-center space-x-3">
+                        <tool.icon className={`h-8 w-8 ${tool.color}`} />
+                        <CardTitle className="text-xl">{tool.name}</CardTitle>
+                      </div>
+                      <CardDescription>{tool.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
+              </motion.div>
+            ))}
+          </motion.div>
+        </section>
+
         {/* AI-Powered Tools */}
         <section>
           <motion.h2

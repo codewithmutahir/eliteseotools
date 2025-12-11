@@ -3,6 +3,7 @@ import { Inter } from "next/font/google"
 import "./globals.css"
 import { ClerkProvider } from "@clerk/nextjs"
 import { ThemeProvider } from "@/components/ThemeProvider"
+import { QueryProvider } from "@/components/QueryProvider"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { ReactNode } from "react"
@@ -51,13 +52,15 @@ export default function RootLayout({
             enableSystem
             disableTransitionOnChange
           >
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-1">
-                {children}
-              </main>
-              <Footer />
-            </div>
+            <QueryProvider>
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-1">
+                  {children}
+                </main>
+                <Footer />
+              </div>
+            </QueryProvider>
           </ThemeProvider>
         </body>
       </html>
