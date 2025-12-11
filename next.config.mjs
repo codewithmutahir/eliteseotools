@@ -12,6 +12,8 @@ const nextConfig = {
   },
   // Server components external packages (native modules)
   serverExternalPackages: ['better-sqlite3', 'canvas'],
+  // Empty turbopack config to silence warning (we're using webpack)
+  turbopack: {},
   // Webpack config for handling native modules and pdfjs-dist
   webpack: (config, { isServer }) => {
     if (isServer) {
