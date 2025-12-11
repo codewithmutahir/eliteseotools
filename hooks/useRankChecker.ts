@@ -38,11 +38,19 @@ export function useRankChecker(
       });
 
       if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to check rank');
+        let errorMessage = `Failed to check rank (${response.status})`;
+        try {
+          const errorData = await response.json();
+          errorMessage = errorData.error || errorMessage;
+        } catch (e) {
+          // If response is not JSON, use status text
+          errorMessage = response.statusText || errorMessage;
+        }
+        throw new Error(errorMessage);
       }
 
-      return response.json();
+      const data = await response.json();
+      return data;
     },
     enabled: enabled && params !== null,
     staleTime: 30 * 60 * 1000, // 30 minutes client-side cache

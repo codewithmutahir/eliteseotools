@@ -29,6 +29,17 @@ const rankCheckSchema = z.object({
 
 export async function POST(request: NextRequest): Promise<NextResponse<RankCheckResponse>> {
   try {
+    // Ensure we have a request body
+    if (!request.body) {
+      return NextResponse.json(
+        {
+          success: false,
+          error: 'Request body is required',
+        },
+        { status: 400 }
+      );
+    }
+
     const body = await request.json();
 
     // Validate input
@@ -104,6 +115,36 @@ export async function POST(request: NextRequest): Promise<NextResponse<RankCheck
     );
   }
 }
+
+// Handle OPTIONS for CORS preflight with restricted origins
+export async function OPTIONS(req: Request): Promise<NextResponse> {
+  const origin =
+    req.headers.get('origin') || req.headers.get('Origin') || '';
+
+  const allowedOrigins = [
+    'https://seotools.elitesolutionusa.com',
+    'http://localhost:3000',
+    'http://127.0.0.1:3000',
+    'http://localhost',
+    'http://127.0.0.1',
+  ];
+
+  let corsOrigin = '';
+  if (allowedOrigins.includes(origin)) {
+    corsOrigin = origin;
+  }
+
+  return new NextResponse(null, {
+    status: 200,
+    headers: {
+      'Access-Control-Allow-Origin': corsOrigin,
+      'Access-Control-Allow-Methods': 'POST, OPTIONS',
+      'Access-Control-Allow-Headers': 'Content-Type',
+      'Vary': 'Origin',
+    },
+  });
+}
+
 
 // Handle unsupported methods
 export async function GET(): Promise<NextResponse> {
