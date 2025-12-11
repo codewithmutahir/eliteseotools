@@ -12,10 +12,6 @@ const nextConfig = {
   },
   // Server components external packages (native modules)
   serverExternalPackages: ['better-sqlite3', 'canvas'],
-  // Turbopack config (Next.js 16 uses Turbopack by default)
-  turbopack: {
-    // Empty config to silence warning - webpack config will be used when needed
-  },
   // Webpack config for canvas (optional dependency) and pdfjs-dist
   // This will be used when running with --webpack flag or in production
   webpack: (config, { isServer }) => {
