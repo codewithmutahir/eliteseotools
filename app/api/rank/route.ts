@@ -3,6 +3,9 @@
  * Handles rank checking with caching support
  */
 
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { getCachedResult, saveCachedResult } from '@/lib/cache';
@@ -147,11 +150,6 @@ export async function OPTIONS(req: NextRequest): Promise<NextResponse> {
 }
 
 
-// Handle unsupported methods
-export async function GET(): Promise<NextResponse> {
-  return NextResponse.json(
-    { error: 'Method not allowed. Use POST.' },
-    { status: 405 }
-  );
-}
+// Note: GET method is not supported for this endpoint
+// Next.js will automatically return 405 for unsupported methods
 
