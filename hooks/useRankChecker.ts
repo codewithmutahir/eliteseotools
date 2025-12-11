@@ -42,12 +42,25 @@ export function useRankChecker(
           body: JSON.stringify(params),
         });
 
+        const responseHeaders = Object.fromEntries(response.headers.entries());
         console.log('📡 [useRankChecker] Response received:', {
           status: response.status,
           statusText: response.statusText,
           ok: response.ok,
-          headers: Object.fromEntries(response.headers.entries()),
+          url: response.url,
+          type: response.type,
+          redirected: response.redirected,
+          headers: responseHeaders,
         });
+        
+        // Clone response to read body for debugging
+        const clonedResponse = response.clone();
+        try {
+          const text = await clonedResponse.text();
+          console.log('📄 [useRankChecker] Response body:', text);
+        } catch (e) {
+          console.log('📄 [useRankChecker] Could not read response body');
+        }
 
         if (!response.ok) {
           let errorMessage = `Failed to check rank (${response.status})`;

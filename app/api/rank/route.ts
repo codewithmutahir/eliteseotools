@@ -1,11 +1,13 @@
 /**
  * API Route Handler for Google Rank Checker
  * Handles rank checking with caching support
+ * Last updated: 2025-12-11
  */
 
 // Route segment config for Vercel production
 export const dynamic = 'force-dynamic';
 export const runtime = 'nodejs';
+export const revalidate = 0;
 
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
