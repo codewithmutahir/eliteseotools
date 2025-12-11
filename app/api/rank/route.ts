@@ -27,31 +27,29 @@ const rankCheckSchema = z.object({
   }),
 });
 
+// Helper function to add CORS headers
+function addCorsHeaders<T>(response: NextResponse<T>): NextResponse<T> {
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+  return response;
+}
+
 export async function POST(request: NextRequest): Promise<NextResponse<RankCheckResponse>> {
   try {
-    // Ensure we have a request body
-    if (!request.body) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'Request body is required',
-        },
-        { status: 400 }
-      );
-    }
-
     const body = await request.json();
 
     // Validate input
     const validationResult = rankCheckSchema.safeParse(body);
     if (!validationResult.success) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: validationResult.error.errors[0]?.message || 'Invalid input',
-        },
-        { status: 400 }
-      );
+    const response = NextResponse.json(
+      {
+        success: false,
+        error: validationResult.error.errors[0]?.message || 'Invalid input',
+      },
+      { status: 400 }
+    );
+    return addCorsHeaders(response);
     }
 
     const { domain, keyword, location } = validationResult.data;
@@ -63,7 +61,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<RankCheck
     const cached = getCachedResult(keyword, normalizedDomain, location);
 
     if (cached) {
-      return NextResponse.json({
+      const response = NextResponse.json({
         success: true,
         data: {
           ...cached.result,
@@ -71,6 +69,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<RankCheck
           cache_timestamp: cached.created_at,
         },
       });
+      return addCorsHeaders(response);
     }
 
     // Get location config
@@ -92,7 +91,7 @@ export async function POST(request: NextRequest): Promise<NextResponse<RankCheck
     saveCachedResult(keyword, normalizedDomain, location, rankResult);
 
     // Return result
-    return NextResponse.json({
+    const response = NextResponse.json({
       success: true,
       data: {
         ...rankResult,
@@ -100,24 +99,26 @@ export async function POST(request: NextRequest): Promise<NextResponse<RankCheck
         cache_timestamp: Date.now(),
       },
     });
+    return addCorsHeaders(response);
   } catch (error) {
     console.error('Rank check API error:', error);
 
     const errorMessage =
       error instanceof Error ? error.message : 'Failed to check rank';
 
-    return NextResponse.json(
+    const response = NextResponse.json(
       {
         success: false,
         error: errorMessage,
       },
       { status: 500 }
     );
+    return addCorsHeaders(response);
   }
 }
 
 // Handle OPTIONS for CORS preflight with restricted origins
-export async function OPTIONS(req: Request): Promise<NextResponse> {
+export async function OPTIONS(req: NextRequest): Promise<NextResponse> {
   const origin =
     req.headers.get('origin') || req.headers.get('Origin') || '';
 
