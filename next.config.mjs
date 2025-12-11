@@ -10,6 +10,8 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
   },
+  // Server components external packages (native modules)
+  serverExternalPackages: ['better-sqlite3', 'canvas'],
   // Turbopack config (Next.js 16 uses Turbopack by default)
   turbopack: {
     // Empty config to silence warning - webpack config will be used when needed
@@ -21,6 +23,7 @@ const nextConfig = {
       config.externals = config.externals || [];
       config.externals.push({
         canvas: 'commonjs canvas',
+        'better-sqlite3': 'commonjs better-sqlite3',
       });
     } else {
       // Client-side: ensure pdfjs-dist worker is handled correctly
