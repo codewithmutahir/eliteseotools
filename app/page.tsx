@@ -48,14 +48,6 @@ const seoTools = [
     icon: TrendingUp,
     color: "text-blue-600",
   },
-  {
-    name: "Free AI Resume Builder",
-    description: "Create a professional resume with AI—from Elite Solution USA",
-    href: "https://resumebuilder.elitesolutionusa.com/",
-    external: true,
-    icon: FileText,
-    color: "text-indigo-600",
-  },
 ]
 
 const aiTools = [
