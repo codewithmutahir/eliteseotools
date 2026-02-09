@@ -45,6 +45,14 @@ export function Footer() {
               <Link href="/tools/word-counter" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                 Word Counter
               </Link>
+              <a
+                href="https://resumebuilder.elitesolutionusa.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm text-muted-foreground hover:text-primary transition-colors"
+              >
+                Free AI Resume Builder
+              </a>
             </div>
           </div>
         </div>
