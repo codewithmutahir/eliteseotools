@@ -48,6 +48,14 @@ const seoTools = [
     icon: TrendingUp,
     color: "text-blue-600",
   },
+  {
+    name: "Free AI Resume Builder",
+    description: "Create a professional resume with AI—from Elite Solution USA",
+    href: "https://resumebuilder.elitesolutionusa.com/",
+    external: true,
+    icon: FileText,
+    color: "text-indigo-600",
+  },
 ]
 
 const aiTools = [
@@ -351,7 +359,12 @@ export default function HomePage() {
           >
             {seoTools.map((tool) => (
               <motion.div key={tool.href} variants={item}>
-                <Link href={tool.href}>
+                <Link
+                  href={tool.href}
+                  {...("external" in tool && tool.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
                   <Card className="h-full hover:shadow-lg transition-all duration-300 hover:scale-105 cursor-pointer">
                     <CardHeader>
                       <div className="flex items-center space-x-3">
