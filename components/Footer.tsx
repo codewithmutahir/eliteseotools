@@ -46,7 +46,7 @@ export function Footer() {
                 Word Counter
               </Link>
               <a
-                href="https://resumebuilder.elitesolutionusa.com/"
+                href="https://resume.elitesolutionusa.com/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-sm text-muted-foreground hover:text-primary transition-colors"
