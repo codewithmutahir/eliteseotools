@@ -7,6 +7,8 @@ import { QueryProvider } from "@/components/QueryProvider"
 import { Navbar } from "@/components/Navbar"
 import { Footer } from "@/components/Footer"
 import { ReactNode } from "react"
+import Script from "next/script"
+
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -62,16 +64,18 @@ export default function RootLayout({
               </div>
             </QueryProvider>
           </ThemeProvider>
-
-          <!-- Google tag (gtag.js) -->
-          <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZXPVDKBWM3"></script>
-          <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-          
-            gtag('config', 'G-ZXPVDKBWM3');
-          </script>
+          <Script
+            src="https://www.googletagmanager.com/gtag/js?id=G-ZXPVDKBWM3"
+            strategy="afterInteractive"
+          />
+          <Script id="gtag-init" strategy="afterInteractive">
+            {`
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ZXPVDKBWM3');
+            `}
+          </Script>
         </body>
       </html>
     </ClerkProvider>
