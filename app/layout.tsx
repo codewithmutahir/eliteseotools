@@ -19,7 +19,7 @@ export const metadata: Metadata = {
   keywords: "SEO Tool",
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://seotools.elitesolutionusa.com'),
   verification: {
-    google: "jnsYszeElPx3OMtH10GeVUNtkmEaDd7AfFJom2aBLow",
+    google: "kneTvWqYbn20McmbEuy2LOThp37VNwd2vNOFHmtouXI",
   },
   openGraph: {
     title: "Free Online SEO Tool Suite | Elitesolution USA",
